@@ -25,27 +25,17 @@ android {
             useSupportLibrary = true
         }
 
-        // OpenAI API 키 설정
+        // 🔑 local.properties에서 키 불러오기
         val properties = Properties()
         val localPropertiesFile = rootProject.file("local.properties")
         if (localPropertiesFile.exists()) {
             properties.load(FileInputStream(localPropertiesFile))
         }
-        buildConfigField(
-            "String",
-            "OPENAI_API_KEY",
-            "\"${properties.getProperty("OPENAI_API_KEY", "")}\""
-        )
-        buildConfigField(
-            "String",
-            "NAVER_CLIENT_ID",
-            "\"${properties.getProperty("NAVER_CLIENT_ID", "")}\""
-        )
-        buildConfigField(
-            "String",
-            "NAVER_CLIENT_SECRET",
-            "\"${properties.getProperty("NAVER_CLIENT_SECRET", "")}\""
-        )
+
+        // BuildConfig에 키 전달
+        buildConfigField("String", "OPENAI_API_KEY", "\"${properties.getProperty("OPENAI_API_KEY", "")}\"")
+        buildConfigField("String", "NAVER_CLIENT_ID", "\"${properties.getProperty("NAVER_CLIENT_ID", "")}\"")
+        buildConfigField("String", "NAVER_CLIENT_SECRET", "\"${properties.getProperty("NAVER_CLIENT_SECRET", "")}\"")
     }
 
     buildTypes {
